@@ -17,7 +17,7 @@ namespace BlogDemo.API
             //在开发环境中使用SqlLite
             services.AddDbContext<MyContext>(options => 
             {
-                options.UseSqlite("Data souse=BlogDemo.db");
+                options.UseSqlite("Data Source=BlogDemo.db");
             });
 
             services.AddHttpsRedirection(options => 
