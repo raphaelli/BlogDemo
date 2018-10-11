@@ -16,11 +16,27 @@ namespace BlogDemo.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddHttpsRedirection(options => {
+                options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
+                options.HttpsPort = 5001;
+
+            });
+
+            services.AddHsts(option => {
+                option.Preload = true;
+                option.IncludeSubDomains = true;
+                option.MaxAge = TimeSpan.FromDays(60);
+                option.ExcludedHosts.Add("example.com");
+                option.ExcludedHosts.Add ("www.example.com");
+
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
+            app.UseHsts();
+            app.UseHttpsRedirection();
             app.UseMvc();
         }
     }
