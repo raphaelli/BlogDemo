@@ -1,4 +1,4 @@
-﻿using BlogDemo.Core.Interface;
+﻿using BlogDemo.Core.Interfac;
 
 namespace BlogDemo.Core.Entities
 {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BlogDemo.Core.Interface
+namespace BlogDemo.Core.Interfac
 {
     public interface IEntity
     {
