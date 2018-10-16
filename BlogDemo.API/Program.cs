@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
+﻿using BlogDemo.Infrastructure.Database;
+using BlogDemo.Infrastructure.DataBase;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Reflection;
 
 namespace BlogDemo.API
 {
@@ -15,7 +13,25 @@ namespace BlogDemo.API
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            var host = CreateWebHostBuilder(args).Build();
+            using (var scope = host.Services.CreateScope())
+            {
+                var service = scope.ServiceProvider;
+                var loggerFactory = service.GetRequiredService<ILoggerFactory>();
+                try
+                {
+                    var myContext = service.GetRequiredService<MyContext>();
+                    MyContextSeed.SeedAsync(myContext, loggerFactory).Wait();
+                }
+                catch (Exception e)
+                {
+                    var logger = loggerFactory.CreateLogger<Program>();
+                    logger.LogError(e,"Error occured seeding the Database.");
+                }
+            }
+
+            host.Run();
+
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
