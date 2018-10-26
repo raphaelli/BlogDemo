@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogDemo.Infrastructure.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20181011135635_Initial")]
-    partial class Initial
+    [Migration("20181026191214_AddConstraintsToPostByReCreate")]
+    partial class AddConstraintsToPostByReCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,13 +23,19 @@ namespace BlogDemo.Infrastructure.Migrations
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Author");
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasMaxLength(50);
 
-                    b.Property<string>("Body");
+                    b.Property<string>("Body")
+                        .IsRequired()
+                        .HasColumnName("nvarchar(max)");
 
                     b.Property<DateTime>("LastModified");
 
-                    b.Property<string>("Title");
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(100);
 
                     b.HasKey("id");
 

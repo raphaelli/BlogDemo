@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BlogDemo.Infrastructure.Migrations
 {
-    public partial class Initial : Migration
+    public partial class AddConstraintsToPostByReCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,9 +13,9 @@ namespace BlogDemo.Infrastructure.Migrations
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Title = table.Column<string>(nullable: true),
-                    Body = table.Column<string>(nullable: true),
-                    Author = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(maxLength: 100, nullable: false),
+                    nvarcharmax = table.Column<string>(name: "nvarchar(max)", nullable: false),
+                    Author = table.Column<string>(maxLength: 50, nullable: false),
                     LastModified = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>

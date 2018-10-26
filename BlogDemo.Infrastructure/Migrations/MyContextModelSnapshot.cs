@@ -21,13 +21,19 @@ namespace BlogDemo.Infrastructure.Migrations
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Author");
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasMaxLength(50);
 
-                    b.Property<string>("Body");
+                    b.Property<string>("Body")
+                        .IsRequired()
+                        .HasColumnName("nvarchar(max)");
 
                     b.Property<DateTime>("LastModified");
 
-                    b.Property<string>("Title");
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(100);
 
                     b.HasKey("id");
 
