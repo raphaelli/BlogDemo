@@ -26,19 +26,16 @@ namespace BlogDemo.API
                 catch (Exception e)
                 {
                     var logger = loggerFactory.CreateLogger<Program>();
-                    logger.LogError(e,"Error occured seeding the Database.");
+                    logger.LogError(e, "Error occured seeding the Database.");
                 }
             }
 
             host.Run();
-
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 //.UseStartup<Startup>();
                 .UseStartup(typeof(StartupDevelopment).GetTypeInfo().Assembly.FullName);
-
-
     }
 }

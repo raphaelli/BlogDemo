@@ -1,10 +1,10 @@
 ﻿using BlogDemo.Core.interfaces;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
 using BlogDemo.Infrastructure.DataBase;
 using BlogDemo.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BlogDemo.API
 {
@@ -17,12 +17,12 @@ namespace BlogDemo.API
             services.AddMvc();
 
             //在开发环境中使用SqlLite
-            services.AddDbContext<MyContext>(options => 
+            services.AddDbContext<MyContext>(options =>
             {
                 options.UseSqlite("Data Source=BlogDemo.db");
             });
 
-            services.AddHttpsRedirection(options => 
+            services.AddHttpsRedirection(options =>
             {
                 options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
                 options.HttpsPort = 5001;
@@ -31,7 +31,6 @@ namespace BlogDemo.API
             //注册Repository 和 Unit Of  Work
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

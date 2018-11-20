@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BlogDemo.Core.Entities
 {
-    public class Post:Entity
+    public class Post : Entity
     {
         public string Title { get; set; }
         public string Body { get; set; }

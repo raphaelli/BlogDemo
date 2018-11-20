@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BlogDemo.Core.Entities;
+﻿using BlogDemo.Core.Entities;
 using BlogDemo.Core.interfaces;
-using BlogDemo.Infrastructure.DataBase;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using System;
+using System.Threading.Tasks;
 
 namespace BlogDemo.API.Controllers
 {
@@ -16,8 +12,7 @@ namespace BlogDemo.API.Controllers
         private readonly IPostRepository _postRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-
-        public PostController(IPostRepository postRepository,IUnitOfWork unitOfWork)
+        public PostController(IPostRepository postRepository, IUnitOfWork unitOfWork)
         {
             _postRepository = postRepository;
             _unitOfWork = unitOfWork;
@@ -45,7 +40,7 @@ namespace BlogDemo.API.Controllers
             _postRepository.addPost(newPost);
 
             //通过Unit of work 持久化数据
-            await _unitOfWork.SaveAsync(); 
+            await _unitOfWork.SaveAsync();
 
             return Ok();
         }

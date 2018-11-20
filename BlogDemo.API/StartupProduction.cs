@@ -1,11 +1,7 @@
-﻿ using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace BlogDemo.API
 {
@@ -16,19 +12,19 @@ namespace BlogDemo.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddHttpsRedirection(options => {
+            services.AddHttpsRedirection(options =>
+            {
                 options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
                 options.HttpsPort = 5001;
-
             });
 
-            services.AddHsts(option => {
+            services.AddHsts(option =>
+            {
                 option.Preload = true;
                 option.IncludeSubDomains = true;
                 option.MaxAge = TimeSpan.FromDays(60);
                 option.ExcludedHosts.Add("example.com");
-                option.ExcludedHosts.Add ("www.example.com");
-
+                option.ExcludedHosts.Add("www.example.com");
             });
         }
 

@@ -11,7 +11,6 @@ namespace BlogDemo.Infrastructure.DataBase.EntityConfigurations
             builder.Property(x => x.Author).IsRequired().HasMaxLength(50);
             builder.Property(x => x.Title).IsRequired().HasMaxLength(100);
             builder.Property(x => x.Body).IsRequired().HasColumnName("nvarchar(max)");
-
         }
     }
 }
